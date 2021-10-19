@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import LoginPage from './pages/Login/LoginPage'
-import RegisterPage from './pages/Register/RegisterPage'
-import HomePage from './pages/Home/HomePage'
+import LoginPage from './components/pages/Login/LoginPage'
+import RegisterPage from './components/pages/Register/RegisterPage'
+import HomePage from './components/pages/Home/HomePage'
 
 export default function App() {
     return (
