@@ -1,0 +1,92 @@
+import styled from 'styled-components'
+
+const HomeHeader = styled.header`
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+
+    width: 100%;
+`
+
+const DataContainer = styled.section`
+    position: relative;
+    height: 450px;
+    width:100%;
+    background-color: white;
+    border-radius: 5px;
+    padding-top: 20px;
+
+    ul {
+        height: 80%
+    }
+
+    ul li {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .date {
+        font-size: 16px;
+        color: #C6C6C6;
+        width: 20%;
+        text-align: center;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .description {
+        font-size: 16px;
+        color: black;
+        width: 60%;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .value {
+        font-size: 16px;
+        color: #03AC00;
+        width: 20%;
+        text-align: center;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    & article {
+        height: calc(20% - 20px); 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    & article p:first-child {
+        font-weight: 700;
+    }
+`
+
+const TransactionsContainer = styled.section`
+    display:flex;
+    justify-content: space-between;
+    align-items:flex-end;
+    
+    width: 100%;
+
+    & .transaction-button {
+        background-color: #A328D6;
+        font-weight: 700;
+        width: 48%;
+        height:110px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 10px;
+        
+        p {
+            color: white;
+        }
+    }
+`
+
+export {
+    HomeHeader,
+    DataContainer,
+    TransactionsContainer
+}

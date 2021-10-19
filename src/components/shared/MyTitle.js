@@ -9,12 +9,10 @@ export default function Title ({type,text}) {
 }
 
 const TitleContainer = styled.h1`
-     ${props => props.type === "login" ? "font-family: 'Saira Stencil One', cursive" : "font-weigth: 700"};
-     
+     ${props => props.type === "login" ? "font-family: 'Saira Stencil One', cursive" : "font-weight: 700"};
+
      font-size:  ${props => props.type === "login" ? "32px" : "26px"}; 
      color: white;
      text-align: center;
-     margin-bottom: 40px;
-
 `
 
