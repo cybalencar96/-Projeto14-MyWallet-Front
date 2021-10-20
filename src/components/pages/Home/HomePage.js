@@ -3,6 +3,7 @@ import MyTitle from "../../shared/MyTitle"
 import { ExitOutline } from 'react-ionicons'
 import { HomeHeader, DataContainer, TransactionsContainer } from "./HomeStyle"
 import { AddCircleOutline, RemoveCircleOutline } from 'react-ionicons'
+import { Link } from 'react-router-dom'
 
 export default function HomePage() {
     return (
@@ -36,22 +37,27 @@ export default function HomePage() {
             </DataContainer>
 
             <TransactionsContainer>
-                <div className="transaction-button">
-                    <AddCircleOutline
-                        color={'#FFF'} 
-                        height="22px"
-                        width="22px"
-                    />
-                    <p>Nova Entrada</p>
-                </div>
-                <div className="transaction-button">
-                    <RemoveCircleOutline
-                        color={'#FFF'} 
-                        height="22px"
-                        width="22px"
-                    />
-                    <p>Nova Saída</p>
-                </div>
+                <Link to="/transaction/entry">
+                    <div className="transaction-button">
+                            <AddCircleOutline
+                                color={'#FFF'} 
+                                height="22px"
+                                width="22px"
+                            />
+                            <p>Nova Entrada</p>
+                    </div>
+                </Link>
+
+                <Link to="/transaction/exit">
+                    <div className="transaction-button">
+                        <RemoveCircleOutline
+                            color={'#FFF'} 
+                            height="22px"
+                            width="22px"
+                        />
+                        <p>Nova Saída</p>
+                    </div>
+                </Link>
             </TransactionsContainer>
         </PageContainer>
     )

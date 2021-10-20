@@ -68,10 +68,15 @@ const TransactionsContainer = styled.section`
     
     width: 100%;
 
+    & a {
+        width: 48%;
+        text-decoration: none;
+        cursor: pointer;
+    }
     & .transaction-button {
         background-color: #A328D6;
         font-weight: 700;
-        width: 48%;
+        width: 100%;
         height:110px;
         display: flex;
         flex-direction: column;

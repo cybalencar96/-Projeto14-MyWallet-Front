@@ -2,7 +2,7 @@ import styled from "styled-components";
 import MyInput from "./MyInput";
 import { useState } from "react";
 
-export default function MyForm({type}) {
+export default function MyForm({type, buttonText}) {
     const initialInputValues = {
         name: "", 
         email: "", 
@@ -46,7 +46,7 @@ export default function MyForm({type}) {
             {type === 'register' ? <RegisterInputs changeInput={changeInput} inputValues={inputValues}/> : ""}
             {type === 'transaction' ? <TransactionInputs changeInput={changeInput} inputValues={inputValues}/> : ""}
             
-            <button className="submit-button" type="submit">Entrar</button>
+            <button className="submit-button" type="submit">{buttonText ? buttonText : "Entrar"}</button>
         </FormContainer>
     )
 }
