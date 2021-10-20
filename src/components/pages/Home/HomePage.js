@@ -4,12 +4,17 @@ import { ExitOutline } from 'react-ionicons'
 import { HomeHeader, DataContainer, TransactionsContainer } from "./HomeStyle"
 import { AddCircleOutline, RemoveCircleOutline } from 'react-ionicons'
 import { Link } from 'react-router-dom'
+import { useContext } from "react"
+import UserContext from "../../../contexts/UserContext"
 
 export default function HomePage() {
+
+    const {user} = useContext(UserContext)
+
     return (
         <PageContainer justifiedBetween>
             <HomeHeader>
-                <MyTitle text="Olá, Fulano"/>
+                <MyTitle text={"Olá, " + user.name}/>
                 <ExitOutline
                     color={'#FFF'} 
                     height="30px"
