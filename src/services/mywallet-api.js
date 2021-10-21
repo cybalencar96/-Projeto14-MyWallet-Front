@@ -19,12 +19,12 @@ const api = {
         return axios.get('/user',setHeader(token))
     } ,
 
-    sendTransaction: (body) => {
-        return axios.post('/registers',body)
+    sendTransaction: (userId,body) => {
+        return axios.post(`/transactions/${userId}`,body)
     },
 
     getTransactions: (userId) => {
-        return axios.get(`/registers/${userId}`)
+        return axios.get(`/transactions/${userId}`)
     }
 }
 

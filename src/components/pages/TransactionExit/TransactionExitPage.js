@@ -59,10 +59,9 @@ export default function TransactionExitPage() {
         const body = {
             ...inputValues,
             entry: false,
-            userId: user.id
         }
 
-        api.sendTransaction(body)
+        api.sendTransaction(user.id,body)
         .then(res => {
             Swal.fire({
                 icon: 'success',

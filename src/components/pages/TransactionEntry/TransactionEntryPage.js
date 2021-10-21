@@ -60,10 +60,9 @@ export default function TransactionEntryPage() {
         const body = {
             ...inputValues,
             entry: true,
-            userId: user.id
         }
 
-        api.sendTransaction(body)
+        api.sendTransaction(user.id,body)
         .then(res => {
             Swal.fire({
                 icon: 'success',
