@@ -4,9 +4,10 @@ import { EntryHeader } from "./TransactionEntryStyle"
 import { FormContainer } from "../../shared/FormContainer"
 import api from "../../../services/mywallet-api"
 import UserContext from '../../../contexts/UserContext'
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import MyInput from "../../shared/MyInput"
+import Loading from "../../shared/Loading"
 
 export default function TransactionEntryPage() {
 
@@ -16,8 +17,28 @@ export default function TransactionEntryPage() {
     }
 
     const [inputValues, setInputValues] = useState(initialInputValues);
-    const { user } = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
     const history = useHistory();
+
+    useEffect(() => {
+        const userToken = localStorage.getItem('userToken')
+        if (userToken) {
+            const {token} = JSON.parse(userToken)
+
+            api.getUserInfo(token)
+            .then(res => {
+                setTimeout(() => setUser(res.data),500)
+            })
+            .catch(err => {
+                alert(err.response.data)
+                localStorage.setItem('userToken','')
+                history.push('/')
+            })
+        } else {
+            history.push('/')
+        }
+        
+    },[])
 
     function changeInput(event,inputType) {
         event.preventDefault();
@@ -32,16 +53,16 @@ export default function TransactionEntryPage() {
         }
     }
 
-    function sendEntry(e) {
+    function sendTransaction(e) {
         e.preventDefault();
 
         const body = {
             ...inputValues,
             entry: true,
-            clientId: user.id
+            userId: user.id
         }
 
-        api.sendEntry(body)
+        api.sendTransaction(body)
         .then(res => {
             alert('entrada registrada com sucesso')
             history.push('/home')
@@ -52,12 +73,17 @@ export default function TransactionEntryPage() {
         })
     }
 
+    if (!user) return (
+        <Loading />
+    )
+
+
     return (
         <PageContainer>
             <EntryHeader>
                 <MyTitle text="Nova entrada"/>
             </EntryHeader>
-            <FormContainer onSubmit={e => sendEntry(e)}>
+            <FormContainer onSubmit={e => sendTransaction(e)}>
                 <MyInput 
                     placeholder="Valor" 
                     onChange={e => changeInput(e,"value")} 

@@ -4,14 +4,13 @@ import { FormContainer } from "../../shared/FormContainer"
 import MyTitle from "../../shared/MyTitle"
 import MyInput from "../../shared/MyInput";
 import { Link,useHistory } from 'react-router-dom'
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import UserContext from "../../../contexts/UserContext";
 import api from "../../../services/mywallet-api"
 
 export default function LoginPage() {
 
     const {setUser} = useContext(UserContext);
-
     const initialInputValues = {
         email: "", 
         password: "", 
@@ -20,6 +19,12 @@ export default function LoginPage() {
     const [inputValues, setInputValues] = useState(initialInputValues);
     const history = useHistory();
 
+    useEffect(() => {
+        let userToken = localStorage.getItem('userToken')
+        if (userToken) {
+            history.push('/home')
+        }
+    },[])
     function changeInput(event,inputType) {
         event.preventDefault();
         switch (inputType) {
@@ -35,11 +40,10 @@ export default function LoginPage() {
 
     function signIn(e) {
         e.preventDefault();
-
+        console.log(inputValues)
         api.signIn(inputValues)
         .then(res => {
-            setUser(res.data)
-            alert('login realizado com sucesso!')
+            localStorage.setItem('userToken', JSON.stringify(res.data))
             history.push('/home')
         })
         .catch(err => {

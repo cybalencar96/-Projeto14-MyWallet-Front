@@ -9,7 +9,7 @@ import { useState } from 'react'
 
 export default function App() {
 
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState('')
     return (
         <UserContext.Provider value={{user,setUser}}>
             <Router>
@@ -33,6 +33,7 @@ export default function App() {
                     <Route path="/transaction/exit" exact>
                         <TransactionExitPage/>
                     </Route>
+
                 </Switch>
             </Router>
         </UserContext.Provider>

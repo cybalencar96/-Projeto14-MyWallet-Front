@@ -11,9 +11,22 @@ const api = {
         return axios.post('/sign-in',body)
     } ,
 
-    sendEntry: (body) => {
+    logOut: (token) => {
+        return axios.get('/log-out',setHeader(token))
+    },
+
+    getUserInfo: (token) => {
+        return axios.get('/user',setHeader(token))
+    } ,
+
+    sendTransaction: (body) => {
         return axios.post('/registers',body)
     }
 }
 
+function setHeader(token) {
+    return { headers: {
+        Authorization: `Bearer ${token}`
+    }}
+}
 export default api;

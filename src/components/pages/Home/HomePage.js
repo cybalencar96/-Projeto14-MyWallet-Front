@@ -3,13 +3,46 @@ import MyTitle from "../../shared/MyTitle"
 import { ExitOutline } from 'react-ionicons'
 import { HomeHeader, DataContainer, TransactionsContainer } from "./HomeStyle"
 import { AddCircleOutline, RemoveCircleOutline } from 'react-ionicons'
-import { Link } from 'react-router-dom'
-import { useContext } from "react"
+import { Link, useHistory } from 'react-router-dom'
+import { useContext, useEffect } from "react"
 import UserContext from "../../../contexts/UserContext"
+import api from "../../../services/mywallet-api"
+import Loading from "../../shared/Loading"
 
 export default function HomePage() {
+    const {user, setUser} = useContext(UserContext)
+    const history = useHistory()
 
-    const {user} = useContext(UserContext)
+    useEffect(() => {
+        const userToken = localStorage.getItem('userToken')
+        if (userToken) {
+            const {token} = JSON.parse(userToken)
+            api.getUserInfo(token)
+            .then(res => {
+                console.log(res.data)
+                setTimeout(() => setUser(res.data),500)
+            })
+            .catch(err => {
+                alert(err.response.data)
+                localStorage.setItem('userToken','')
+                history.push('/')
+            })
+        } else {
+            history.push('/')
+        }
+        
+    },[])
+
+
+    function logOut() {
+        api.logOut(user.token)
+        localStorage.setItem('userToken','')
+        history.push('/')
+    }
+
+    if (!user) return (
+        <Loading />
+    )
 
     return (
         <PageContainer justifiedBetween>
@@ -19,6 +52,7 @@ export default function HomePage() {
                     color={'#FFF'} 
                     height="30px"
                     width="30px"
+                    onClick={logOut}
                 />
             </HomeHeader>
 
