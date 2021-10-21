@@ -7,6 +7,7 @@ import { Link,useHistory } from 'react-router-dom'
 import { useState, useContext, useEffect } from "react";
 import UserContext from "../../../contexts/UserContext";
 import api from "../../../services/mywallet-api"
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
 
@@ -40,15 +41,20 @@ export default function LoginPage() {
 
     function signIn(e) {
         e.preventDefault();
-        console.log(inputValues)
+        
         api.signIn(inputValues)
         .then(res => {
             localStorage.setItem('userToken', JSON.stringify(res.data))
             history.push('/home')
         })
         .catch(err => {
-            console.log(err)
-            alert('deu ruim' + "   " + err.response.data)
+            if (err.response.status === 401) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Email or password invalid...',
+                  })
+            }
         })
     }
 

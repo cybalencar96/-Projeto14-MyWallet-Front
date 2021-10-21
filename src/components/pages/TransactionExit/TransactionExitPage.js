@@ -8,6 +8,7 @@ import { useState, useContext, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import MyInput from "../../shared/MyInput"
 import Loading from "../../shared/Loading"
+import Swal from "sweetalert2"
 
 export default function TransactionExitPage() {
 
@@ -30,7 +31,6 @@ export default function TransactionExitPage() {
                 setTimeout(() => setUser(res.data),500)
             })
             .catch(err => {
-                alert(err.response.data)
                 localStorage.setItem('userToken','')
                 history.push('/')
             })
@@ -64,12 +64,20 @@ export default function TransactionExitPage() {
 
         api.sendTransaction(body)
         .then(res => {
-            alert('saída registrada com sucesso')
+            Swal.fire({
+                icon: 'success',
+                title: 'Yass',
+                text: 'Entry registered successfully!!',
+              })
             history.push('/home')
         })
         .catch(err => {
             console.log(err.response)
-            alert('deu ruim  ' + err.response.data)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.response.data,
+              })
         })
     }
 

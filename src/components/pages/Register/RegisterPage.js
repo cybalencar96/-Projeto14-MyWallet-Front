@@ -6,6 +6,8 @@ import MyInput from "../../shared/MyInput";
 import { Link,useHistory } from 'react-router-dom'
 import { useState } from "react";
 import api from "../../../services/mywallet-api"
+import Swal from 'sweetalert2'
+
 export default function RegisterPage() {
 
     const initialInputValues = {
@@ -44,10 +46,16 @@ export default function RegisterPage() {
 
         api.signUp(inputValues)
         .then(res => {
-            alert('cadastro realizado com sucesso')
             history.push('/')
         })
-        .catch(err => {console.log(err.response); alert('deu ruim')})
+        .catch(err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.response.data,
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+        })
     }
 
     return (

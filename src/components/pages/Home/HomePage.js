@@ -19,11 +19,9 @@ export default function HomePage() {
             const {token} = JSON.parse(userToken)
             api.getUserInfo(token)
             .then(res => {
-                console.log(res.data)
                 setTimeout(() => setUser(res.data),500)
             })
             .catch(err => {
-                alert(err.response.data)
                 localStorage.setItem('userToken','')
                 history.push('/')
             })
