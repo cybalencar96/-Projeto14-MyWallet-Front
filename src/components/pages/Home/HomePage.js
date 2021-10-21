@@ -4,22 +4,35 @@ import { ExitOutline } from 'react-ionicons'
 import { HomeHeader, DataContainer, TransactionsContainer } from "./HomeStyle"
 import { AddCircleOutline, RemoveCircleOutline } from 'react-ionicons'
 import { Link, useHistory } from 'react-router-dom'
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import UserContext from "../../../contexts/UserContext"
 import api from "../../../services/mywallet-api"
 import Loading from "../../shared/Loading"
 
 export default function HomePage() {
     const {user, setUser} = useContext(UserContext)
+    const [transactions, setTransactions] = useState('')
+    const [total, setTotal] = useState(0)
     const history = useHistory()
 
     useEffect(() => {
         const userToken = localStorage.getItem('userToken')
         if (userToken) {
             const {token} = JSON.parse(userToken)
+
             api.getUserInfo(token)
             .then(res => {
                 setTimeout(() => setUser(res.data),500)
+
+                api.getTransactions(res.data.id)
+                .then (transactionRes => {
+                    setTransactions(transactionRes.data)
+
+                    setTotal(transactionRes.data.reduce((accum, curr) => {
+                        return Number(accum) + Number(curr.value)
+                    },0))
+                })
+
             })
             .catch(err => {
                 localStorage.setItem('userToken','')
@@ -56,20 +69,19 @@ export default function HomePage() {
 
             <DataContainer>
                 <ul>
-                    <li>
-                        <p className="date">30/11</p>
-                        <p className="description">Almoço mãe</p>
-                        <p className="value">39.90</p>
-                    </li>
-                    <li>
-                        <p className="date">30/11</p>
-                        <p className="description">Almoço mãe</p>
-                        <p className="value">39,90</p>
-                    </li>
+                    {
+                        transactions && transactions.map(transaction => (
+                            <li>
+                                <p className="date">{new Date(transaction.date).toLocaleString().substring(0,5)}</p>
+                                <p className="description">{transaction.description}</p>
+                                <p className={'value ' + (transaction.value >= 0 ? "posValue" : "negValue")}>{transaction.value}</p>
+                            </li>
+                        ))
+                    }
                 </ul>
                 <article>
                     <p>SALDO</p>
-                    <p>R$ 15,00</p>
+                    <p>R$ {total.toFixed(2)}</p>
                 </article>
             </DataContainer>
 

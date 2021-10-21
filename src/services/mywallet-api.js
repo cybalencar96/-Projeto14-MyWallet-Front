@@ -21,6 +21,10 @@ const api = {
 
     sendTransaction: (body) => {
         return axios.post('/registers',body)
+    },
+
+    getTransactions: (userId) => {
+        return axios.get(`/registers/${userId}`)
     }
 }
 

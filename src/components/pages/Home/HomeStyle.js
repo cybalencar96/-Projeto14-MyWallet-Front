@@ -48,6 +48,14 @@ const DataContainer = styled.section`
         font-family: 'Raleway', sans-serif;
     }
 
+    .posValue {
+        color: #03AC00;
+    }
+
+    .negValue {
+        color: #C70000;
+    }
+
     & article {
         height: calc(20% - 20px); 
         display: flex;
