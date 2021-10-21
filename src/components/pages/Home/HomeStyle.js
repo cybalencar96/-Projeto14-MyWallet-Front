@@ -16,8 +16,13 @@ const DataContainer = styled.section`
     border-radius: 5px;
     padding-top: 20px;
 
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     ul {
-        height: 80%
+        height: 85%;
+        overflow:scroll;
     }
 
     ul li {
@@ -62,6 +67,7 @@ const DataContainer = styled.section`
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
+        box-shadow: -1px -6px 27px -7px rgba(0,0,0,0.2)
     }
 
     & article p:first-child {

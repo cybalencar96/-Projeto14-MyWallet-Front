@@ -27,10 +27,9 @@ export default function HomePage() {
                 api.getTransactions(res.data.id)
                 .then (transactionRes => {
                     setTransactions(transactionRes.data)
-
-                    setTotal(transactionRes.data.reduce((accum, curr) => {
-                        return Number(accum) + Number(curr.value)
-                    },0))
+                    
+                    const newTotal = sumAll(transactionRes.data)
+                    setTotal(newTotal)
                 })
 
             })
@@ -110,4 +109,15 @@ export default function HomePage() {
             </TransactionsContainer>
         </PageContainer>
     )
+}
+
+function sumAll (arrObjs) {
+    //[{value: 123},{value: 345}]
+    return arrObjs.reduce((accum, curr) => {
+        return Number(accum) + Number(curr.value)
+    },0)
+}
+
+export {
+    sumAll
 }
