@@ -24,7 +24,7 @@ export default function HomePage() {
             .then(res => {
                 setTimeout(() => setUser(res.data),500)
 
-                api.getTransactions(res.data.id)
+                api.getTransactions(res.data.token)
                 .then (transactionRes => {
                     setTransactions(transactionRes.data)
                     
@@ -46,6 +46,7 @@ export default function HomePage() {
 
     function logOut() {
         api.logOut(user.token)
+        setUser('')
         localStorage.setItem('userToken','')
         history.push('/')
     }

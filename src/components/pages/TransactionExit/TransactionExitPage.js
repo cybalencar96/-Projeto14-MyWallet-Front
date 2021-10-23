@@ -61,12 +61,12 @@ export default function TransactionExitPage() {
             entry: false,
         }
 
-        api.sendTransaction(user.id,body)
+        api.sendTransaction(user.token,body)
         .then(res => {
             Swal.fire({
                 icon: 'success',
                 title: 'Yass',
-                text: 'Entry registered successfully!!',
+                text: 'Exit registered successfully!!',
               })
             history.push('/home')
         })

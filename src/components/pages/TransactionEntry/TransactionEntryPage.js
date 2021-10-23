@@ -61,8 +61,8 @@ export default function TransactionEntryPage() {
             ...inputValues,
             entry: true,
         }
-
-        api.sendTransaction(user.id,body)
+        
+        api.sendTransaction(user.token,body)
         .then(res => {
             Swal.fire({
                 icon: 'success',
