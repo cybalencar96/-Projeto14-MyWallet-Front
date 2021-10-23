@@ -20,6 +20,21 @@ const DataContainer = styled.section`
     flex-direction: column;
     justify-content: space-between;
 
+    & .no-content {
+        width: 100%;
+        height: 100%;
+        padding: 0 20px;
+
+        color: #868686;
+        font-size: 20px;
+        line-height: 23px;
+
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
     ul {
         height: 85%;
         overflow:scroll;

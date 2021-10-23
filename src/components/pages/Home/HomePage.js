@@ -70,7 +70,9 @@ export default function HomePage() {
             <DataContainer>
                 <ul>
                     {
-                        transactions && transactions.reverse().map(transaction => (
+                        transactions.length !== 0 ? 
+                        
+                        transactions.reverse().map(transaction => (
                             <li>
                                 <div>
                                     <p className="date">{new Date(transaction.date).toLocaleString().substring(0,5)}</p>
@@ -79,6 +81,12 @@ export default function HomePage() {
                                 <p className={'value ' + (transaction.value >= 0 ? "posValue" : "negValue")}>{transaction.value}</p>
                             </li>
                         ))
+
+                        :
+
+                        <p className="no-content">
+                            Não há registros de entrada ou saída
+                        </p>
                     }
                 </ul>
                 <article>
