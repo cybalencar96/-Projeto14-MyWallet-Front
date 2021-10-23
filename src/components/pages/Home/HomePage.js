@@ -72,9 +72,9 @@ export default function HomePage() {
                     {
                         transactions && transactions.map(transaction => (
                             <li>
-                                <p className="date">{new Date(transaction.date).toLocaleString().substring(0,5)}</p>
-                                <p className="description">{transaction.description}</p>
-                                <p className={'value ' + (transaction.value >= 0 ? "posValue" : "negValue")}>{transaction.value}</p>
+                                <div className="date">{new Date(transaction.date).toLocaleString().substring(0,5)}</div>
+                                <div className="description">{transaction.description}</div>
+                                <div className={'value ' + (transaction.value >= 0 ? "posValue" : "negValue")}>{transaction.value}</div>
                             </li>
                         ))
                     }

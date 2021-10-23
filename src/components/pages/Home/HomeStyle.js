@@ -27,7 +27,9 @@ const DataContainer = styled.section`
 
     ul li {
         display: flex;
+        align-items:center;
         margin-bottom: 20px;
+
     }
 
     .date {
@@ -43,6 +45,7 @@ const DataContainer = styled.section`
         color: black;
         width: 60%;
         font-family: 'Raleway', sans-serif;
+        word-wrap:break-word;
     }
 
     .value {
