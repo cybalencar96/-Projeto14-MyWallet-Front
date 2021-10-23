@@ -28,22 +28,27 @@ const DataContainer = styled.section`
     ul li {
         display: flex;
         align-items:center;
+        justify-content:space-between;
         margin-bottom: 20px;
 
+    }
+
+    ul li > div {
+        display: flex;
+        align-items: center;
     }
 
     .date {
         font-size: 16px;
         color: #C6C6C6;
-        width: 20%;
         text-align: center;
         font-family: 'Raleway', sans-serif;
+        margin: 0 10px;
     }
 
     .description {
         font-size: 16px;
         color: black;
-        width: 60%;
         font-family: 'Raleway', sans-serif;
         word-wrap:break-word;
     }
@@ -51,9 +56,9 @@ const DataContainer = styled.section`
     .value {
         font-size: 16px;
         color: #03AC00;
-        width: 20%;
-        text-align: center;
+        text-align: end;
         font-family: 'Raleway', sans-serif;
+        margin:0 10px;
     }
 
     .posValue {

@@ -70,11 +70,13 @@ export default function HomePage() {
             <DataContainer>
                 <ul>
                     {
-                        transactions && transactions.map(transaction => (
+                        transactions && transactions.reverse().map(transaction => (
                             <li>
-                                <div className="date">{new Date(transaction.date).toLocaleString().substring(0,5)}</div>
-                                <div className="description">{transaction.description}</div>
-                                <div className={'value ' + (transaction.value >= 0 ? "posValue" : "negValue")}>{transaction.value}</div>
+                                <div>
+                                    <p className="date">{new Date(transaction.date).toLocaleString().substring(0,5)}</p>
+                                    <p className="description">{transaction.description}</p>
+                                </div>
+                                <p className={'value ' + (transaction.value >= 0 ? "posValue" : "negValue")}>{transaction.value}</p>
                             </li>
                         ))
                     }

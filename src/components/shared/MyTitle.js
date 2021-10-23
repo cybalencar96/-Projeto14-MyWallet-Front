@@ -22,6 +22,10 @@ const TitleContainer = styled.h1`
      text-overflow: ellipsis;
 
      color: white;
+
+     &::-webkit-scrollbar {
+        display: none;
+    }
      
 `
 
