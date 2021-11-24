@@ -8,9 +8,11 @@ import { useState, useContext, useEffect } from "react";
 import UserContext from "../../../contexts/UserContext";
 import api from "../../../services/mywallet-api"
 import Swal from "sweetalert2";
+import { ButtonLoading } from '../../shared/Loading';
 
 export default function LoginPage() {
     const { setUser } = useContext(UserContext);
+    const [loading, setLoading] = useState(false);
 
     const initialInputValues = {
         email: "", 
@@ -42,6 +44,7 @@ export default function LoginPage() {
     }
 
     function signIn(e) {
+        setLoading(true);
         e.preventDefault();
         
         api.signIn(inputValues)
@@ -59,7 +62,8 @@ export default function LoginPage() {
                     text: 'Email or password invalid...',
                   })
             }
-        })
+            setLoading(false);
+        });
     }
 
     return (
@@ -82,7 +86,7 @@ export default function LoginPage() {
                     required
                     type="password"
                 />
-                    <button className="submit-button" type="submit">Entrar</button>
+                    <button className="submit-button" type="submit">{loading ? <ButtonLoading /> : 'Entrar'}</button>
                 </FormContainer>
 
                 <Link className="to-register" to="/register">Primeira vez? Cadastre-se já!</Link>

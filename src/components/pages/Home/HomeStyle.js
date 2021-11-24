@@ -4,18 +4,20 @@ const HomeHeader = styled.header`
     display: flex;
     justify-content:space-between;
     align-items:center;
-
+    max-width: 800px;
     width: 100%;
 `
 
 const DataContainer = styled.section`
     position: relative;
-    height: 450px;
+    height: 100%;
     width:100%;
+    padding-top: 20px;
+    margin: 20px 0;
+
     background-color: white;
     border-radius: 5px;
-    padding-top: 20px;
-
+    max-width: 800px;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -102,7 +104,7 @@ const TransactionsContainer = styled.section`
     display:flex;
     justify-content: space-between;
     align-items:flex-end;
-    
+    max-width: 800px;
     width: 100%;
 
     & a {

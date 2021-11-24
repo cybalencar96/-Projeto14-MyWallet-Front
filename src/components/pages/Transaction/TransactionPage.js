@@ -7,7 +7,7 @@ import UserContext from '../../../contexts/UserContext'
 import { useState, useContext, useEffect } from "react"
 import { useHistory, useLocation } from "react-router-dom"
 import MyInput from "../../shared/MyInput"
-import Loading from "../../shared/Loading"
+import Loading, { ButtonLoading } from "../../shared/Loading"
 import Swal from "sweetalert2"
 
 export default function TransactionPage() {
@@ -22,6 +22,7 @@ export default function TransactionPage() {
     const history = useHistory();
     const location = useLocation().pathname.split('/');
     const transactionPage = location[location.length - 1];
+    const [loading, setLoading] = useState(false);
 
     function changeInput(event,inputType) {
         event.preventDefault();
@@ -38,6 +39,7 @@ export default function TransactionPage() {
 
     function sendTransaction(e) {
         e.preventDefault();
+        setLoading(true);
 
         const body = {
             ...inputValues,
@@ -60,6 +62,7 @@ export default function TransactionPage() {
                 title: 'Oops...',
                 text: err.response.data,
               })
+            setLoading(false);
         })
     }
 
@@ -87,7 +90,7 @@ export default function TransactionPage() {
                     value={inputValues.description}
                     required
                 />
-                <button className="submit-button" type="submit">Salvar transação</button>
+                <button className="submit-button" type="submit">{loading ? <ButtonLoading /> : 'Salvar transação'}</button>
             </FormContainer>
 
         </PageContainer>

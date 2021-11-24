@@ -7,8 +7,9 @@ import { Link,useHistory } from 'react-router-dom'
 import { useState } from "react";
 import api from "../../../services/mywallet-api"
 import Swal from 'sweetalert2'
-
+import { ButtonLoading } from "../../shared/Loading";
 export default function RegisterPage() {
+    const [loading, setLoading] = useState(false);
 
     const initialInputValues = {
         name: "", 
@@ -42,6 +43,7 @@ export default function RegisterPage() {
     }
 
     function signUp(e) {
+        setLoading(true);
         e.preventDefault();
 
         api.signUp(inputValues)
@@ -55,6 +57,7 @@ export default function RegisterPage() {
                 text: err.response.data,
                 footer: '<a href="">Why do I have this issue?</a>'
               })
+              setLoading(false);
         })
     }
 
@@ -92,7 +95,7 @@ export default function RegisterPage() {
                         required
                         type="password"
                     />
-                    <button className="submit-button" type="submit">Salvar</button>
+                    <button className="submit-button" type="submit">{loading ? <ButtonLoading /> : 'Salvar'}</button>
                 </FormContainer>
 
 
