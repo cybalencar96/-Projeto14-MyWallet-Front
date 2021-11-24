@@ -10,8 +10,8 @@ import api from "../../../services/mywallet-api"
 import Swal from "sweetalert2";
 
 export default function LoginPage() {
+    const { setUser } = useContext(UserContext);
 
-    const {setUser} = useContext(UserContext);
     const initialInputValues = {
         email: "", 
         password: "", 
@@ -21,11 +21,13 @@ export default function LoginPage() {
     const history = useHistory();
 
     useEffect(() => {
-        let userToken = localStorage.getItem('userToken')
+        const userToken = localStorage.getItem('userToken')
         if (userToken) {
+            setUser(JSON.parse(userToken))
             history.push('/home')
         }
-    },[])
+    },[]);
+    
     function changeInput(event,inputType) {
         event.preventDefault();
         switch (inputType) {
@@ -44,6 +46,8 @@ export default function LoginPage() {
         
         api.signIn(inputValues)
         .then(res => {
+            setUser(res.data)
+            console.log(res.data)
             localStorage.setItem('userToken', JSON.stringify(res.data))
             history.push('/home')
         })

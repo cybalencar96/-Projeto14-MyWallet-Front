@@ -14,41 +14,26 @@ export default function HomePage() {
     const [transactions, setTransactions] = useState('')
     const [total, setTotal] = useState(0)
     const history = useHistory()
-
+    
     useEffect(() => {
-        const userToken = localStorage.getItem('userToken')
-        if (userToken) {
-            const {token} = JSON.parse(userToken)
-
-            api.getUserInfo(token)
-            .then(res => {
-                setTimeout(() => setUser(res.data),500)
-
-                api.getTransactions(res.data.token)
-                .then (transactionRes => {
-                    setTransactions(transactionRes.data)
-                    
-                    const newTotal = sumAll(transactionRes.data)
-                    setTotal(newTotal)
-                })
-
-            })
-            .catch(err => {
-                localStorage.setItem('userToken','')
-                history.push('/')
-            })
-        } else {
+        api.getTransactions(user.token)
+        .then(transactionRes => {
+            setTransactions(transactionRes.data)
+            
+            const newTotal = sumAll(transactionRes.data)
+            setTotal(newTotal)
+        })
+        .catch(err => {
             history.push('/')
-        }
-        
+        })
     },[])
 
 
     function logOut() {
-        api.logOut(user.token)
-        setUser('')
-        localStorage.setItem('userToken','')
-        history.push('/')
+        api.logOut(user.token);
+        setUser('');
+        localStorage.removeItem('userToken');
+        history.push('/');
     }
 
     if (!user) return (
