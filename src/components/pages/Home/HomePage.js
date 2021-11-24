@@ -24,8 +24,11 @@ export default function HomePage() {
             setTotal(newTotal);
         })
         .catch(err => {
-            setUser('');
-            history.push('/')
+            if (err.response && err.response.status === 401) {
+                setUser('');
+                localStorage.removeItem('userToken');
+            }
+            history.push('/');
         })
     },[])
 
