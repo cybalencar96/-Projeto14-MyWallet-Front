@@ -42,6 +42,10 @@ const DataContainer = styled.section`
         overflow:scroll;
     }
 
+    & ul::-webkit-scrollbar {
+        display: none;
+    }
+
     ul li {
         display: flex;
         align-items:center;
@@ -98,6 +102,8 @@ const DataContainer = styled.section`
     & article p:first-child {
         font-weight: 700;
     }
+
+    
 `
 
 const TransactionsContainer = styled.section`
@@ -123,9 +129,15 @@ const TransactionsContainer = styled.section`
         justify-content: space-between;
         padding: 10px;
         
+        transition: background-color 0.3s;
+
         p {
             color: white;
         }
+    }
+
+    & .transaction-button:hover {
+        background-color: #bb55e6
     }
 `
 

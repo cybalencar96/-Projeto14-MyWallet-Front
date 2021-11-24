@@ -27,11 +27,15 @@ const Input = styled.input`
     padding: 10px;
     margin-bottom: 10px;
 
+    transition: border-bottom 0.1s;
+
     &::placeholder {
         color: #DBDBDB;
     }
 
     &:focus {
         outline: none;
+        border-bottom: 4px solid #9c645c;
+
     }
 `

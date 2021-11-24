@@ -18,6 +18,13 @@ const FormContainer = styled.form`
         color: white;
         font-weight: 700;
         font-size: 20px;
+
+        cursor: pointer;
+        transition: background-color 0.3s
+    }
+
+    .submit-button:hover {
+        background-color: #bb55e6
     }
 `
 
