@@ -11,20 +11,20 @@ import Loading from "../../shared/Loading"
 import { successAlert } from "../../../utils/sweetalert"
 
 export default function HomePage() {
-    const {user, setUser} = useContext(UserContext)
-    const [transactions, setTransactions] = useState('')
-    const [total, setTotal] = useState(0)
-    const history = useHistory()
+    const {user, setUser} = useContext(UserContext);
+    const [transactions, setTransactions] = useState('');
+    const [total, setTotal] = useState(0);
+    const history = useHistory();
 
     useEffect(() => {
         api.getTransactions(user.token)
         .then(transactionRes => {
-            setTransactions(transactionRes.data)
-            
-            const newTotal = sumAll(transactionRes.data)
-            setTotal(newTotal)
+            setTransactions(transactionRes.data);
+            const newTotal = sumAll(transactionRes.data);
+            setTotal(newTotal);
         })
         .catch(err => {
+            setUser('');
             history.push('/')
         })
     },[])
