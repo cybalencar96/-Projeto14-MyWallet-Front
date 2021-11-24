@@ -58,10 +58,9 @@ export default function TransactionPage() {
         })
     }
 
-    if (!user) return (
+    if (!user.name) return (
         <Loading />
     )
-
 
     return (
         <PageContainer>

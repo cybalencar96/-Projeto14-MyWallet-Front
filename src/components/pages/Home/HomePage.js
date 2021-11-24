@@ -15,7 +15,7 @@ export default function HomePage() {
     const [transactions, setTransactions] = useState('')
     const [total, setTotal] = useState(0)
     const history = useHistory()
-    
+
     useEffect(() => {
         api.getTransactions(user.token)
         .then(transactionRes => {
@@ -38,7 +38,7 @@ export default function HomePage() {
         history.push('/');
     }
 
-    if (!user) return (
+    if (!user.name) return (
         <Loading />
     )
 
