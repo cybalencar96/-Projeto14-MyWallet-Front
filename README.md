@@ -7,7 +7,7 @@
 <h3 align="center">My Wallet</h3>
 
   <p align="center">
-    A useful app if you have money to manage
+    💸 A useful app if you have money to manage 💸
     <br />
     <a href="https://github.com/cybalencar96/mywallet-front"><strong>Explore the docs »</strong></a>
     <br />
