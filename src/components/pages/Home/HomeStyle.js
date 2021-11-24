@@ -4,18 +4,20 @@ const HomeHeader = styled.header`
     display: flex;
     justify-content:space-between;
     align-items:center;
-
+    max-width: 800px;
     width: 100%;
 `
 
 const DataContainer = styled.section`
     position: relative;
-    height: 450px;
+    height: 100%;
     width:100%;
+    padding-top: 20px;
+    margin: 20px 0;
+
     background-color: white;
     border-radius: 5px;
-    padding-top: 20px;
-
+    max-width: 800px;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -38,6 +40,10 @@ const DataContainer = styled.section`
     ul {
         height: 85%;
         overflow:scroll;
+    }
+
+    & ul::-webkit-scrollbar {
+        display: none;
     }
 
     ul li {
@@ -96,13 +102,15 @@ const DataContainer = styled.section`
     & article p:first-child {
         font-weight: 700;
     }
+
+    
 `
 
 const TransactionsContainer = styled.section`
     display:flex;
     justify-content: space-between;
     align-items:flex-end;
-    
+    max-width: 800px;
     width: 100%;
 
     & a {
@@ -121,9 +129,15 @@ const TransactionsContainer = styled.section`
         justify-content: space-between;
         padding: 10px;
         
+        transition: background-color 0.3s;
+
         p {
             color: white;
         }
+    }
+
+    & .transaction-button:hover {
+        background-color: #bb55e6
     }
 `
 

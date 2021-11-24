@@ -8,10 +8,12 @@ import { useState, useContext, useEffect } from "react";
 import UserContext from "../../../contexts/UserContext";
 import api from "../../../services/mywallet-api"
 import Swal from "sweetalert2";
+import { ButtonLoading } from '../../shared/Loading';
 
 export default function LoginPage() {
+    const { setUser } = useContext(UserContext);
+    const [loading, setLoading] = useState(false);
 
-    const {setUser} = useContext(UserContext);
     const initialInputValues = {
         email: "", 
         password: "", 
@@ -21,11 +23,13 @@ export default function LoginPage() {
     const history = useHistory();
 
     useEffect(() => {
-        let userToken = localStorage.getItem('userToken')
+        const userToken = localStorage.getItem('userToken')
         if (userToken) {
+            setUser(JSON.parse(userToken))
             history.push('/home')
         }
-    },[])
+    },[]);
+    
     function changeInput(event,inputType) {
         event.preventDefault();
         switch (inputType) {
@@ -40,10 +44,13 @@ export default function LoginPage() {
     }
 
     function signIn(e) {
+        setLoading(true);
         e.preventDefault();
         
         api.signIn(inputValues)
         .then(res => {
+            setUser(res.data)
+            console.log(res.data)
             localStorage.setItem('userToken', JSON.stringify(res.data))
             history.push('/home')
         })
@@ -55,7 +62,8 @@ export default function LoginPage() {
                     text: 'Email or password invalid...',
                   })
             }
-        })
+            setLoading(false);
+        });
     }
 
     return (
@@ -78,7 +86,7 @@ export default function LoginPage() {
                     required
                     type="password"
                 />
-                    <button className="submit-button" type="submit">Entrar</button>
+                    <button className="submit-button" type="submit">{loading ? <ButtonLoading /> : 'Entrar'}</button>
                 </FormContainer>
 
                 <Link className="to-register" to="/register">Primeira vez? Cadastre-se já!</Link>
