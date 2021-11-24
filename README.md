@@ -41,7 +41,7 @@ An animated gif to introduce you to this simple, but very pleasant full-stack pr
 
 - Want to simply try it? Access demo by [clicking here](https://mywallet-front-five.vercel.app/)!
 
-- Want to run front and back in local environment? Learn how in README of gratibox-back repository by [clicking here](https://github.com/cybalencar96/mywallet-back)!
+- Want to run front and back in local environment? Learn how on README in  backend repository by [clicking here](https://github.com/cybalencar96/mywallet-back)!
 
 - Want to run front local not worrying with back? Keep reading then!
 
