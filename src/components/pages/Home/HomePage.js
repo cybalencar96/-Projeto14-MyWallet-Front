@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react"
 import UserContext from "../../../contexts/UserContext"
 import api from "../../../services/mywallet-api"
 import Loading from "../../shared/Loading"
+import { successAlert } from "../../../utils/sweetalert"
 
 export default function HomePage() {
     const {user, setUser} = useContext(UserContext)
@@ -30,6 +31,7 @@ export default function HomePage() {
 
 
     function logOut() {
+        successAlert({text: 'Tchaau, volte sempre!'})
         api.logOut(user.token);
         setUser('');
         localStorage.removeItem('userToken');
@@ -49,6 +51,7 @@ export default function HomePage() {
                     height="30px"
                     width="30px"
                     onClick={logOut}
+                    style={{ cursor: 'pointer' }}
                 />
             </HomeHeader>
 

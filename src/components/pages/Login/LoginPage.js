@@ -7,8 +7,8 @@ import { Link,useHistory } from 'react-router-dom'
 import { useState, useContext, useEffect } from "react";
 import UserContext from "../../../contexts/UserContext";
 import api from "../../../services/mywallet-api"
-import Swal from "sweetalert2";
 import { ButtonLoading } from '../../shared/Loading';
+import { errorAlert } from "../../../utils/sweetalert";
 
 export default function LoginPage() {
     const { setUser } = useContext(UserContext);
@@ -56,11 +56,7 @@ export default function LoginPage() {
         })
         .catch(err => {
             if (err.response.status === 401) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Email or password invalid...',
-                  })
+                errorAlert({text: 'Email or password invalid...'})
             }
             setLoading(false);
         });

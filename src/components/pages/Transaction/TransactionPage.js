@@ -8,7 +8,7 @@ import { useState, useContext, useEffect } from "react"
 import { useHistory, useLocation } from "react-router-dom"
 import MyInput from "../../shared/MyInput"
 import Loading, { ButtonLoading } from "../../shared/Loading"
-import Swal from "sweetalert2"
+import { errorAlert, successAlert } from "../../../utils/sweetalert"
 
 export default function TransactionPage() {
 
@@ -48,20 +48,12 @@ export default function TransactionPage() {
 
         api.sendTransaction(user.token,body)
         .then(res => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Yass',
-                text: `A ${transactionPage} was registered successfully!!`,
-              })
+            successAlert({text: `A ${transactionPage} was registered successfully!!`})
             history.push('/home')
         })
         .catch(err => {
             console.log(err.response)
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: err.response.data,
-              })
+            errorAlert({text: err.response.data})
             setLoading(false);
         })
     }

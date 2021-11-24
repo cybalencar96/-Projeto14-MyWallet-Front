@@ -8,6 +8,8 @@ import { useState } from "react";
 import api from "../../../services/mywallet-api"
 import Swal from 'sweetalert2'
 import { ButtonLoading } from "../../shared/Loading";
+import { errorAlert, successAlert } from "../../../utils/sweetalert";
+
 export default function RegisterPage() {
     const [loading, setLoading] = useState(false);
 
@@ -48,16 +50,12 @@ export default function RegisterPage() {
 
         api.signUp(inputValues)
         .then(res => {
+            successAlert({text: 'User registered! Redirecting to login...'});
             history.push('/')
         })
         .catch(err => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: err.response.data,
-                footer: '<a href="">Why do I have this issue?</a>'
-              })
-              setLoading(false);
+            errorAlert({text: err.response.data});
+            setLoading(false);
         })
     }
 
