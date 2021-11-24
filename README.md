@@ -58,7 +58,7 @@ An animated gif to introduce you to this simple, but very pleasant full-stack pr
 1. Clone repository
 
 ```sh
-git clone https://github.com/cybalencar96/gratibox-front.git
+git clone https://github.com/cybalencar96/mywallet-front.git
 ```
 
 2. Install dependencies executing command in root
